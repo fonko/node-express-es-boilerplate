@@ -211,6 +211,13 @@ List of available routes:
 `PATCH /v1/users/:userId` - update user\
 `DELETE /v1/users/:userId` - delete user
 
+Claro, entiendo perfectamente la frustración. Mi objetivo es que puedas copiar y pegar el contenido directamente en tu archivo `README.md` sin que GitHub lo interprete de forma incorrecta.
+
+Te daré el archivo completo en un solo bloque de código, sin ningún formato adicional. De esta manera, al copiarlo, no habrá ningún tipo de interferencia en el Markdown.
+
+-----
+
+````
 ## Error Handling
 
 The app has a centralized error handling mechanism.
@@ -218,13 +225,13 @@ The app has a centralized error handling mechanism.
 Controllers should try to catch the errors and forward them to the error handling middleware (by calling `next(error)`). For convenience, you can also wrap the controller inside the catchAsync utility wrapper, which forwards the error.
 
 ```javascript
-const catchAsync = require('../utils/catchAsync');
+import catchAsync from '../utils/catchAsync.js';
 
 const controller = catchAsync(async (req, res) => {
   // this error will be forwarded to the error handling middleware
   throw new Error('Something wrong happened');
 });
-```
+````
 
 The error handling middleware sends an error response, which has the following format:
 
@@ -242,9 +249,9 @@ The app has a utility ApiError class to which you can attach a response code and
 For example, if you are trying to get a user from the DB who is not found, and you want to send a 404 error, the code should look something like:
 
 ```javascript
-const httpStatus = require('http-status');
-const ApiError = require('../utils/ApiError');
-const User = require('../models/User');
+import httpStatus from 'http-status';
+import ApiError from '../utils/ApiError.js';
+import User from '../models/User.js';
 
 const getUser = async (userId) => {
   const user = await User.findById(userId);
@@ -261,10 +268,10 @@ Request data is validated using [Joi](https://joi.dev/). Check the [documentatio
 The validation schemas are defined in the `src/validations` directory and are used in the routes by providing them as parameters to the `validate` middleware.
 
 ```javascript
-const express = require('express');
-const validate = require('../../middlewares/validate');
-const userValidation = require('../../validations/user.validation');
-const userController = require('../../controllers/user.controller');
+import express from 'express';
+import validate from '../../middlewares/validate.js';
+import userValidation from '../../validations/user.validation.js';
+import userController from '../../controllers/user.controller.js';
 
 const router = express.Router();
 
@@ -276,9 +283,9 @@ router.post('/users', validate(userValidation.createUser), userController.create
 To require authentication for certain routes, you can use the `auth` middleware.
 
 ```javascript
-const express = require('express');
-const auth = require('../../middlewares/auth');
-const userController = require('../../controllers/user.controller');
+import express from 'express';
+import auth from '../../middlewares/auth.js';
+import userController from '../../controllers/user.controller.js';
 
 const router = express.Router();
 
@@ -304,9 +311,9 @@ A refresh token is valid for 30 days. You can modify this expiration time by cha
 The `auth` middleware can also be used to require certain rights/permissions to access a route.
 
 ```javascript
-const express = require('express');
-const auth = require('../../middlewares/auth');
-const userController = require('../../controllers/user.controller');
+import express from 'express';
+import auth from '../../middlewares/auth.js';
+import userController from '../../controllers/user.controller.js';
 
 const router = express.Router();
 
@@ -326,7 +333,7 @@ Import the logger from `src/config/logger.js`. It is using the [Winston](https:/
 Logging should be done according to the following severity levels (ascending order from most important to least important):
 
 ```javascript
-const logger = require('<path to src>/config/logger');
+import logger from '<path to src>/config/logger.js';
 
 logger.error('message'); // level 0
 logger.warn('message'); // level 1
@@ -338,8 +345,8 @@ logger.debug('message'); // level 5
 
 In development mode, log messages of all severity levels will be printed to the console.
 
-In production mode, only `info`, `warn`, and `error` logs will be printed to the console.\
-It is up to the server (or process manager) to actually read them from the console and store them in log files.\
+In production mode, only `info`, `warn`, and `error` logs will be printed to the console.
+It is up to the server (or process manager) to actually read them from the console and store them in log files.
 This app uses pm2 in production mode, which is already configured to store the logs in log files.
 
 Note: API request information (request url, response code, timestamp, etc.) are also automatically logged (using [morgan](https://github.com/expressjs/morgan)).
@@ -349,8 +356,8 @@ Note: API request information (request url, response code, timestamp, etc.) are 
 The app also contains 2 custom mongoose plugins that you can attach to any mongoose model schema. You can find the plugins in `src/models/plugins`.
 
 ```javascript
-const mongoose = require('mongoose');
-const { toJSON, paginate } = require('./plugins');
+import mongoose from 'mongoose';
+import { toJSON, paginate } from './plugins/index.js';
 
 const userSchema = mongoose.Schema(
   {
@@ -369,8 +376,8 @@ const User = mongoose.model('User', userSchema);
 
 The toJSON plugin applies the following changes in the toJSON transform call:
 
-- removes \_\_v, createdAt, updatedAt, and any schema path that has private: true
-- replaces \_id with id
+  - removes \_\_v, createdAt, updatedAt, and any schema path that has private: true
+  - replaces \_id with id
 
 ### paginate
 
@@ -425,14 +432,17 @@ To maintain a consistent coding style across different IDEs, the project contain
 
 ## Contributing
 
-Contributions are more than welcome! Please check out the [contributing guide](CONTRIBUTING.md).
+Contributions are more than welcome\! Please check out the [contributing guide](https://www.google.com/search?q=CONTRIBUTING.md).
 
 ## Inspirations
 
-- [danielfsousa/express-rest-es2017-boilerplate](https://github.com/danielfsousa/express-rest-es2017-boilerplate)
-- [madhums/node-express-mongoose](https://github.com/madhums/node-express-mongoose)
-- [kunalkapadia/express-mongoose-es6-rest-api](https://github.com/kunalkapadia/express-mongoose-es6-rest-api)
+  - [danielfsousa/express-rest-es2017-boilerplate](https://github.com/danielfsousa/express-rest-es2017-boilerplate)
+  - [madhums/node-express-mongoose](https://github.com/madhums/node-express-mongoose)
+  - [kunalkapadia/express-mongoose-es6-rest-api](https://github.com/kunalkapadia/express-mongoose-es6-rest-api)
 
 ## License
 
-[MIT](LICENSE)
+[MIT](https://www.google.com/search?q=LICENSE)
+
+```
+```
